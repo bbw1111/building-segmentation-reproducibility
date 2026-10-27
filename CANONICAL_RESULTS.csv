@@ -1,0 +1,30 @@
+﻿source_table,item,canonical_value,provenance
+T1,"X0 val BuildingIoU (seed42, 训练时口径)",64.63,metrics/X0_Baseline_metrics.json
+T1,"X1 val BuildingIoU (seed42, 训练时口径)",83.98,metrics/X1_Edge_NoSupervision_metrics.json
+T1,"X2-region val BuildingIoU (seed42, 统一PIL重评口径)",83.80 (83.8010),05/validation_final/X2_region_PIL_3seed_validation.csv
+T1,"X2 val BuildingIoU (seed42, 训练时口径)",83.81,metrics/X2_Edge_Supervision_metrics.json
+T2,edge λ=0/0.1/0.2 val BuildingIoU,83.98/83.96/83.81,旧edge敏感性实验(表2来源)
+T2,edge λ=0.2 BF1/BIoU,58.26/34.10,同上; 正式X2锁定λ_edge=0.2依据
+T3,X1 val 3seed BuildingIoU,83.88±0.13,metrics/X1_*_seed*.json
+T3,X1 val 3seed F1/BF1/BIoU,91.23±0.08 / 57.97±0.33 / 33.59±0.34,metrics/X1_*_seed*.json
+T3,X2 val 3seed BuildingIoU,83.94±0.25,metrics/X2_*_seed*.json
+T3,X2 val 3seed F1/BF1/BIoU,91.27±0.15 / 58.24±0.53 / 33.96±0.37,metrics/X2_*_seed*.json
+T3,X2-region PIL val 3seed BuildingIoU (固定),"84.74±0.82 (84.7425±0.8154; seed42=83.8010, seed123=85.2144, seed2026=85.2122)",05/validation_final/X2_region_PIL_3seed_validation_mean_SD.csv
+T3,X2-region PIL val 3seed F1/BF1/BIoU (固定),91.74±0.48 / 59.67±1.27 / 34.92±1.15,05/validation_final/X2_region_PIL_3seed_validation_mean_SD.csv
+T4,X2-shallow val 3seed BuildingIoU/F1,85.54±0.08 / 92.20±0.05,04/validation/validation_mean_SD.csv
+T4,X2-shallow test 3seed BuildingIoU/F1/BF1/BIoU,83.52±0.16 / 91.02±0.09 / 61.28±0.11 / 36.41±0.10,04/independent_test/test_mean_SD.csv
+T5,U-Net test BuildingIoU,86.35,07/UNET_RESNET18/test_metrics.json
+T5,DeepLabV3+ test BuildingIoU,82.91,07/DEEPLABV3PLUS_RESNET18/test_metrics.json
+T5,SegFormer-B0 test BuildingIoU,79.07,07/SEGFORMER_B0/test_metrics.json
+T5,CBRNet复现 test BuildingIoU/BF1/BIoU,89.65 / 65.54 / 45.82,07/CBRNET/CBRNet_test_paper_metrics.json
+T5,X2 test全指标,81.59/89.56/91.20/88.56/89.86/59.40/34.88,X2 seed42 test
+T5,X2-shallow test (seed42)全指标,83.64/90.70/90.07/92.14/91.09/61.17/36.52,04/independent_test/seed42_metrics.json
+T6,X1 test 3seed全指标,BuildingIoU 81.43±0.53; F1 89.77±0.32; BF1 58.94±0.30; BIoU 34.04±0.37,02/summary/WHU_9CKPT_mean_SD.csv
+T6,X2-region test 3seed全指标,BuildingIoU 82.34±1.20; F1 90.31±0.72; BF1 60.23±1.00; BIoU 35.27±1.10,02/summary/WHU_9CKPT_mean_SD.csv
+T6,X2 test 3seed全指标,BuildingIoU 81.62±0.10; F1 89.88±0.06; BF1 59.29±0.26; BIoU 34.64±0.28,02/summary/WHU_9CKPT_mean_SD.csv
+T6,统计检验 X2-region vs X2 (test逐图配对),"+0.71pp, 聚类bootstrap95%CI[+0.53,+0.90], Wilcoxon p=2.28e-46; 分种子42:-0.20/123:+1.31/2026:+1.03",13_FINAL_AUDIT/STAT_TESTS/
+T7,Inria X1/X2/X2-shallow BuildingIoU,62.86/63.63/64.33,08/FINAL_REPORT/Inria_final_metrics.csv
+T7,Inria 统一BF1/BIoU,"X1:53.61/17.54, X2:53.86/17.66, shallow:56.29/18.77",08/unified_boundary/
+CPLX,统一THOP GMACs (固定),X2 6.729122 / X2-shallow 6.240485 / U-Net 7.850557 / DeepLabV3+ 7.946732 / SegFormer-B0 1.692140 / CBRNet未测,10_SCRIPTS/complexity/unified_thop_complexity.csv
+CPLX,速度/显存(自定义脚本口径),X2 5.521ms/181FPS/125.95MB; X2-shallow 5.063ms/197.5FPS/170.90MB,10_SCRIPTS/complexity/
+PARAM,参数量,X0 11.509 / X1=X2=X2-region=11.5375 / X2-shallow=11.5387 / U-Net 14.414 / DLV3+ 16.603 / SegF 3.715 / CBRNet 22.685,各config
