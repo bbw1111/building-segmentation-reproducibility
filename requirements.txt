@@ -1,1 +1,15 @@
+# Python dependencies identified from the uploaded notebooks
+# Package versions still need verification against the original cloud environments.
 
+numpy
+pandas
+matplotlib
+opencv-python
+Pillow
+tqdm
+torch
+torchvision
+transformers
+segmentation-models-pytorch
+thop
+ipykernel
