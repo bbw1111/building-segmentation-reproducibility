@@ -1,0 +1,8 @@
+metric,mean,sample_SD
+BuildingIoU,83.5216,0.158
+True_mIoU,90.6505,0.0746
+Precision,91.1443,1.1272
+Recall,90.9194,1.2991
+F1,91.0209,0.0939
+BoundaryF1,61.2771,0.112
+BoundaryIoU,36.4075,0.1
