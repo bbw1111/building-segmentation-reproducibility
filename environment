@@ -1,27 +1,54 @@
-/kaggle/input/datasets/xiaomaoperson/whu-data/whu_data → WHU三split
-/kaggle/input cbrnet2 → CBRNet权重
-/kaggle/input SeedTest → 9CKPT评测用9权重
-/kaggle/input inria数据 → 180 tile
+# Experimental Environment
 
-# 完整pip freeze需在Kaggle对应notebook中导出, 待归档。
-# 关键版本(已知): torch 2.10.0+cu128(2026-09环境) / torchvision匹配 / opencv-python / Pillow / numpy / thop(复杂度)
+## 1. WHU Formal Training and Evaluation
 
-Kaggle: Python 3.12.13 (Inria/region/shallow批次)
-本地复核: Python 3.9.25
+- **Platform:** Kaggle
+- **Hardware:** NVIDIA Tesla T4, 15 GB VRAM
+- **Python:** 3.10–3.12 across different runs
+- **PyTorch:** 2.x with CUDA 12.x; exact versions vary by run and are not yet fully archived
+- **Dataset path in the original environment:** `/kaggle/input/datasets/xiaomaoperson/whu-data/whu_data`
+- **Dataset split sizes:** 4,736 training images, 1,036 validation images, and 2,416 test images
+- **Input size:** 256 × 256 pixels
+- **Image processing:** PIL image loading, bilinear interpolation for images, nearest-neighbor interpolation for labels, followed by `ToTensor`. No mean–standard-deviation normalization was applied.
+- **Training configuration:** Batch size 8, 50 epochs, Adam optimizer, learning rate 1e-3
+- **Data augmentation and post-processing:** None
+- **Model selection:** Best checkpoint selected using validation Building IoU
 
-PyTorch 2.10.0+cu128, CUDA Runtime 12.8
+A local verification environment used Python 3.9.25 and PyTorch 2.8.0+cpu. The recorded verification values matched the corresponding Kaggle results at the reported precision.
 
-WHU正式训练/评测 (Kaggle):
-Python 3.10-3.12 (分批次), PyTorch 2.x+cu12x, NVIDIA Tesla T4 15GB
-数据: /kaggle/input/datasets/xiaomaoperson/whu-data/whu_data (4736/1036/2416)
-输入256x256; PIL读取(BILINEAR图/NEAREST标签)+ToTensor, 无均值方差归一化
-batch 8, 50 epochs, Adam lr=1e-3, 无增强无后处理, val BuildingIoU选best
-本地复核环境: Python 3.9.25, PyTorch 2.8.0+cpu (rs_seg env), 复核值与Kaggle逐位一致
+## 2. Inria, X2-region, and X2-shallow Experiments
 
-NVIDIA Tesla T4 15GB (15360MiB), 单卡cuda:0
+- **Platform:** Kaggle
+- **Python:** 3.12.13
+- **PyTorch:** 2.10.0+cu128
+- **CUDA runtime:** 12.8
+- **GPU:** NVIDIA Tesla T4, 15 GB VRAM
+- **Driver:** 580.159.04; the driver reports CUDA 13.0 as its maximum supported CUDA version
+- **Inria data:** 180 tiles, split into 150 training tiles and 30 validation tiles
+- **Patch generation:** 512 × 512 windows, stride 1536, and 9 patches per tile, producing 1,620 patches
+- **Image processing:** The X1, X2, and X2-shallow implementations used OpenCV-based image loading consistently within this experimental group.
 
-Inria补充实验 (Kaggle):
-Python 3.12.13, PyTorch 2.10.0+cu128 (CUDA Runtime 12.8)
-NVIDIA Tesla T4 15GB, Driver 580.159.04 (nvidia-smi显示CUDA 13.0为驱动上限)
-数据以Kaggle Input只读挂载; 180 tile→150/30, 512窗口/1536步长/9patch, 共1620
-X1/X2/X2-shallow同为OpenCV读取实现(组内一致)
+## 3. Additional Evaluation Inputs
+
+The original Kaggle environment used the following mounted inputs:
+
+- WHU three-split dataset: `/kaggle/input/datasets/xiaomaoperson/whu-data/whu_data`
+- CBRNet weights: mounted under the Kaggle input directory identified as `cbrnet2`
+- Nine-checkpoint evaluation weights: mounted under the Kaggle input directory identified as `SeedTest`
+- Inria data: mounted under a Kaggle input directory
+
+These are environment-specific paths and are not portable download links. Users must configure the corresponding dataset and checkpoint paths in their own environment.
+
+## 4. Dependency Version Status
+
+The recorded September 2026 environment includes PyTorch 2.10.0+cu128 and a compatible torchvision installation. Other identified dependencies include NumPy, OpenCV, Pillow, and THOP for model complexity measurement.
+
+A complete `pip freeze` export from each original Kaggle notebook has not yet been archived. Therefore, the exact package versions for all formal training and evaluation runs remain to be verified. The dependency list should not be interpreted as a fully tested, version-pinned environment specification.
+
+## 5. Reproducibility Notes
+
+The experiments were conducted across multiple cloud and local environments. Python and PyTorch versions were not identical across all runs.
+
+The original Kaggle input paths must be adapted before execution. Exact environment reproduction requires the corresponding source code, configuration, dataset split, checkpoint, and dependency versions for each experiment.
+
+This document records the currently available environment information; it does not claim that every experiment can be reproduced from a clean environment without further verification.
