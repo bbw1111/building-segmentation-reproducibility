@@ -1,0 +1,27 @@
+/kaggle/input/datasets/xiaomaoperson/whu-data/whu_data → WHU三split
+/kaggle/input cbrnet2 → CBRNet权重
+/kaggle/input SeedTest → 9CKPT评测用9权重
+/kaggle/input inria数据 → 180 tile
+
+# 完整pip freeze需在Kaggle对应notebook中导出, 待归档。
+# 关键版本(已知): torch 2.10.0+cu128(2026-09环境) / torchvision匹配 / opencv-python / Pillow / numpy / thop(复杂度)
+
+Kaggle: Python 3.12.13 (Inria/region/shallow批次)
+本地复核: Python 3.9.25
+
+PyTorch 2.10.0+cu128, CUDA Runtime 12.8
+
+WHU正式训练/评测 (Kaggle):
+Python 3.10-3.12 (分批次), PyTorch 2.x+cu12x, NVIDIA Tesla T4 15GB
+数据: /kaggle/input/datasets/xiaomaoperson/whu-data/whu_data (4736/1036/2416)
+输入256x256; PIL读取(BILINEAR图/NEAREST标签)+ToTensor, 无均值方差归一化
+batch 8, 50 epochs, Adam lr=1e-3, 无增强无后处理, val BuildingIoU选best
+本地复核环境: Python 3.9.25, PyTorch 2.8.0+cpu (rs_seg env), 复核值与Kaggle逐位一致
+
+NVIDIA Tesla T4 15GB (15360MiB), 单卡cuda:0
+
+Inria补充实验 (Kaggle):
+Python 3.12.13, PyTorch 2.10.0+cu128 (CUDA Runtime 12.8)
+NVIDIA Tesla T4 15GB, Driver 580.159.04 (nvidia-smi显示CUDA 13.0为驱动上限)
+数据以Kaggle Input只读挂载; 180 tile→150/30, 512窗口/1536步长/9patch, 共1620
+X1/X2/X2-shallow同为OpenCV读取实现(组内一致)
