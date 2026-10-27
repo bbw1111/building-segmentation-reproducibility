@@ -13,6 +13,7 @@
 - **Training configuration:** Batch size 8, 50 epochs, Adam optimizer, learning rate 1e-3
 - **Data augmentation and post-processing:** None
 - **Model selection:** Best checkpoint selected using validation Building IoU
+- **Model initialization: ImageNet-pretrained weights were enabled in the displayed notebook configuration (USE_IMAGENET_WEIGHTS=True).
 
 A local verification environment used Python 3.9.25 and PyTorch 2.8.0+cpu. The recorded verification values matched the corresponding Kaggle results at the reported precision.
 
