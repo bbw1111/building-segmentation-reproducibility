@@ -1,5 +1,0 @@
-metric,mean,sample_SD
-BuildingIoU,85.5369,0.0795
-F1,92.2047,0.0462
-BoundaryF1,60.491,0.3661
-BoundaryIoU,35.9654,0.4745
