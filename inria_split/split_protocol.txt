@@ -1,0 +1,5 @@
+180个官方train tile → 文件名排序后每6取1为val → 150 train / 30 val;
+每tile 512×512窗口、1536步长、3×3=9 patch; 合计1350 train / 270 val;
+训练与验证patch不来自同一源tile(tile级无泄漏)。
+逐tile清单见 tile_split_master.txt; tile_patch_mapping.csv 未单独导出,
+可由 inria_step1_make_patches.py 确定性重生成。
