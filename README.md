@@ -1,57 +1,77 @@
 # Building Segmentation Reproducibility
 
-## Overview
+## 1. Overview
 
-This repository contains experimental notebooks and selected result files associated with a research study on remote-sensing building segmentation.
+This repository provides selected experimental notebooks, dataset split information, environment documentation, and result summaries associated with a study on remote-sensing building segmentation.
 
-The study investigates building segmentation using different model configurations and edge-related supervision strategies. The repository is intended to document the experimental settings and support inspection of the reported results.
+The study investigates the effects of decoder design, edge-related supervision, and feature reuse on building segmentation performance.
 
-## Repository Contents
+The repository is intended to support the inspection of experimental settings and reported results.
 
-### Experimental Notebooks
+## 2. Repository Structure
 
-- `whu_seed42_experiments.ipynb`: WHU building segmentation experiments associated with seed 42.
+### 2.1 Experimental Notebooks
+
+- `whu_seed42_experiments.ipynb`: WHU building segmentation experiments associated with random seed 42.
 - `whu_seed2026_and_baselines.ipynb`: Additional WHU experiments and baseline comparisons.
-- `edge_supervision_ablation.ipynb`: Experiments examining edge-supervision settings.
-- `inria_legacy_experiments.ipynb`: Earlier Inria experiments retained for reference. These experiments should not automatically be interpreted as the final evaluation protocol used in the manuscript.
+- `edge_supervision_ablation.ipynb`: Experiments examining different edge-supervision settings.
+- `inria_legacy_experiments.ipynb`: Earlier Inria experiments retained as historical experimental records. These experiments should not be interpreted as the final evaluation protocol reported in the manuscript.
 
-### Results
+### 2.2 Dataset Split Information
 
-The `结果/` directory contains selected experimental result files:
+The `inria_split/` directory contains supporting materials for the Inria tile-level split protocol:
+
+- `README_Inria_Split_Protocol.md`: Description of the split protocol.
+- `split_protocol.txt`: Summary of the dataset partitioning procedure.
+- `tile_split_master.txt`: Source-tile split information.
+- `tile_patch_mapping_generator.py`: Script for regenerating the tile-to-patch mapping.
+
+These files document the source-tile separation used to reduce potential spatial data leakage between training and validation subsets.
+
+### 2.3 Experimental Results
+
+The `result/` directory contains selected experimental result summaries:
 
 - `independent_test/X2_shallow_test_mean_SD.csv`: Summary statistics for X2-shallow independent-test results.
 - `validation/X2_shallow_validation_mean_SD.csv`: Summary statistics for X2-shallow validation results.
 - `validation_final/X2_region_PIL_3seed_validation_mean_SD.csv`: Three-seed validation summary for X2-region.
-- `规范结果.csv`: A consolidated record of selected experimental values and their provenance.
+- `WHU_9CKPT_mean_SD.csv`: WHU experimental summary.
 
-The reported values should be interpreted according to the evaluation protocol and experiment descriptions in the associated manuscript.
+The root-level file `CANONICAL_RESULTS.csv` provides a consolidated record of selected experimental values.
 
-## Datasets
+The reported results should be interpreted together with the corresponding experimental configurations and evaluation protocols described in the manuscript.
 
-The experiments use the WHU building dataset and the Inria Aerial Image Labeling Dataset.
+## 3. Datasets
 
-The original datasets are not included in this repository. Users should obtain them from their official sources and comply with the applicable access conditions and usage licenses.
+The experiments use the WHU Building Dataset and the Inria Aerial Image Labeling Dataset.
 
-Dataset-specific preprocessing and directory settings may need to be adapted to the local environment.
+The original datasets are not redistributed in this repository. Users should obtain the datasets from their respective official sources and comply with the applicable access conditions and licenses.
 
-## Environment and Dependencies
+Dataset directory paths may need to be adjusted according to the local environment.
 
-The `requirements.txt` file provides the currently recorded Python dependencies.
+## 4. Environment and Dependencies
 
-Some notebooks were developed in cloud-based environments. Package versions, hardware availability, dataset paths, and notebook settings may need to be checked before execution.
+The repository includes:
 
-The current repository should not be assumed to reproduce every reported experiment without additional environment and artifact verification.
+- `requirements.txt`: Recorded Python package dependencies.
+- `ENVIRONMENT.md`: Additional environment and execution information.
 
-## Reproducibility Notes
+Some experiments were developed in cloud-based computing environments. Package versions, hardware availability, dataset paths, and notebook configurations may require adaptation before execution.
 
-The repository is being organized from an existing experimental archive. The notebooks and result files serve as supporting research materials.
+## 5. Reproducibility Notes
 
-Before attempting to reproduce a result, verify the corresponding model configuration, random seed, dataset split, checkpoint, and evaluation protocol.
+The repository provides selected supporting materials from the experimental archive rather than a fully self-contained reproduction package.
 
-Historical or exploratory experiments should be distinguished from the formal experiments reported in the manuscript.
+Before reproducing or interpreting a result, users should verify the corresponding model configuration, random seed, dataset split, checkpoint availability, and evaluation protocol.
 
-## Data and Code Availability
+Historical and exploratory experiments are distinguished from the formal experimental settings described in the manuscript.
 
-The availability of code and supporting experimental materials is subject to the applicable ownership, licensing, and redistribution conditions.
+The absence of original datasets and model checkpoint files means that some experiments may require additional materials to be independently reproduced.
 
-A permanent repository link and a definitive description of the publicly available materials should be provided in the manuscript only after the repository contents and sharing permissions have been verified.
+## 6. Data and Code Availability
+
+This repository provides selected experimental notebooks, dataset split information, environment documentation, and result summaries for research inspection.
+
+The original WHU and Inria datasets are not included and must be obtained from their respective sources. Model checkpoint files and other materials not explicitly listed in this repository are not claimed to be publicly available.
+
+The repository should therefore be regarded as a collection of supporting research materials, rather than a guarantee of complete end-to-end reproducibility for every reported experiment.
